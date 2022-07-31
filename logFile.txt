@@ -1,0 +1,37 @@
+2022-07-28 17:17:20 New game started.
+<<< Player X's turn >>>
+(X 2 3)
+ -----
+(4 5 6)
+ -----
+(7 8 9)
+ -----
+<<< Player O's turn >>>
+(X 2 3)
+ -----
+(O 5 6)
+ -----
+(7 8 9)
+ -----
+<<< Player X's turn >>>
+(X X 3)
+ -----
+(O 5 6)
+ -----
+(7 8 9)
+ -----
+<<< Player O's turn >>>
+(X X 3)
+ -----
+(O O 6)
+ -----
+(7 8 9)
+ -----
+<<< Player X's turn >>>
+(X X X)
+ -----
+(O O 6)
+ -----
+(7 8 9)
+ -----
+X is the winner of the game. Congratulation!

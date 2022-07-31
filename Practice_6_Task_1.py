@@ -1,8 +1,33 @@
 # Игра крестики-нолики
+import datetime
+
 stepsCounter=0
 winFlag=False
 turnFlag=False
 userData = list(range(1,10))
+
+def TitleLog(): # записываем в файл информацию о старте новой игры
+      todayDateTime=datetime.datetime.today().strftime("%Y-%m-%d %H:%M:%S")
+      title=todayDateTime + ' New game started.' +'\n'
+      with open('logFile.txt', "a") as file:
+            file.write(title)
+      file.close
+
+def WinnerLog(name):#записываем инфу о результате игры
+      with open('logFile.txt', "a") as file:
+            if name=="DRAW":
+                  file.write("The result of the game is DRAW! Try a new game!"+"\n"+"\n")
+            else:
+                  file.write(f"{name} is the winner of the game. Congratulation!"+"\n"+"\n")
+      file.close
+
+def GetLog(data,oper):# записываем ходы игроков
+      with open('logFile.txt', "a") as file:
+            file.write(f"<<< Player {oper}'s turn >>>"+"\n")
+            for i in range(3):
+                  file.write("(" + str(data[0+i*3]) + ' ' + str(data[1+i*3]) +' ' + str(data[2+i*3]) +")"+ "\n")
+                  file.write(" -----" + "\n")
+      file.close
 
 def CheckEnteredNumber(number):
     try:
@@ -43,13 +68,15 @@ def GetWinner(data):
                   data[i[1]]='*'
                   data[i[2]]='*'
                   print(f"The WINNER is {winOper} !")
+                  WinnerLog(winOper)
                   return True
                   break
       return False
 
+TitleLog()
 GameField(userData)
 while winFlag==False:
-      if stepsCounter<9:
+      if stepsCounter<9:#если израсходованы все ходы, то ничья
           if turnFlag==False:
             operand='X'
             turnFlag=True
@@ -58,10 +85,12 @@ while winFlag==False:
             turnFlag=False
           userData=InputData(userData,operand)
           GameField(userData)
+          GetLog(userData,operand)
           winFlag=GetWinner(userData)
           print()
       else:
-         print(f"The result of the game is DRAW! Try a new game!")
+         print("The result of the game is DRAW! Try a new game!")
+         WinnerLog("DRAW")
          winFlag=True
       stepsCounter=stepsCounter+1
 GameField(userData)
